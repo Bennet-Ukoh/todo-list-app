@@ -1,0 +1,272 @@
+/* Base resets */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+input {
+  font: inherit;
+}
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font: inherit;
+  background: none;
+}
+
+small {
+  font: inherit;
+}
+
+/* Overall theme: light & modern */
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #f7f7f7; /* Soft light background */
+  overflow-x: hidden;
+  color: #333; /* Dark, readable text */
+}
+
+main {
+  width: 972px;
+  height: 600px;
+  background-color: #fff; /* White main container */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+/* Header remains bold with dark purple */
+header {
+  text-align: center;
+  background-color: #50008a; /* Rich dark purple */
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #ddd;
+  color: #fff;
+}
+
+header h1 {
+  font-size: 1.5rem;
+}
+
+/* Content area: grid layout for desktop */
+.content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  padding: 2rem;
+  /* Overflow removed to let only task list scroll */
+}
+
+/* Task items */
+.item {
+  display: flex;
+  position: relative;
+  height: 50px;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+}
+
+.item > input {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+}
+
+.item > label {
+  cursor: pointer;
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+}
+
+/* Checkbox styling */
+label > input {
+  height: 15px;
+  width: 15px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  outline: 2px solid transparent;
+  transition-duration: 0.3s;
+  background-color: #fff;
+  cursor: pointer;
+  margin-right: 13px;
+  box-sizing: content-box;
+}
+
+label > input:hover {
+  border-color: #8f8474;
+}
+
+label > input:checked {
+  border-color: #6e6251;
+  background-color: #6e6251;
+}
+
+label > label {
+  cursor: pointer;
+}
+
+/* Buttons inside each task */
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  gap: 1rem;
+}
+
+.item-btn:hover,
+.item-btn:focus {
+  transform: scale(1.2);
+}
+
+/* Scrollable task list area */
+.item-list {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+  background-color: #fff;
+  overflow-y: auto;
+  scrollbar-color: #ccc #f7f7f7;
+  scrollbar-width: thin;
+  position: relative;
+  max-height: 400px;
+}
+
+/* Sidebar styling */
+.sidebar {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  background-color: #f9f9f9; /* Very light gray background */
+  border-left: 1px solid #eee;
+  padding: 18px 25px 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+h2 {
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Sidebar form input */
+form > input {
+  height: 45px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 12px 0 8px 0;
+  padding: 0 16px;
+  font-size: 14px;
+  background-color: #fff;
+  color: #333;
+}
+
+form > input::placeholder {
+  font-style: italic;
+  color: #999;
+}
+
+/* Primary button styling */
+.btn {
+  height: 45px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  background-color: #ae0079; /* Dark purple stays as accent */
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  background-color: rgb(152, 9, 109);
+}
+
+/* Secondary button styling */
+.btn--secondary {
+  opacity: 0.85;
+  font-size: 14px;
+  background-color: rgb(222, 197, 214);
+  color: #000000;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+}
+.btn--secondary:hover {
+  color: #fff;
+}
+
+.button-group {
+  margin-top: 8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Empty list message styling */
+.empty-list {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+  margin: auto;
+  flex-direction: column;
+  color: #666;
+  padding: 2rem;
+}
+
+/* Responsive adjustments for mobile view */
+@media (max-width: 768px) {
+  main {
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+  }
+  .item-list {
+    max-height: 300px;
+    margin-bottom: 1rem;
+  }
+  .sidebar {
+    border-left: none;
+    border-top: 1px solid #ddd;
+    padding: 1rem;
+  }
+}
+
+footer {
+  width: min(972px, 100%);
+  font-size: 12px;
+  opacity: 0.5;
+  margin-top: 12px;
+  width: 100%;
+  text-align: center;
+}
