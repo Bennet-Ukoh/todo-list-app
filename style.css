@@ -233,6 +233,8 @@ form > input::placeholder {
   text-align: center;
   justify-content: center;
   width: 100%;
+  max-width: 400px;
+  gap: 1rem;
   margin: auto;
   flex-direction: column;
   color: #666;

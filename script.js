@@ -43,21 +43,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Duplicate a task element from a template
   const duplicateTask = (text, completed = false) => {
-    // Try to get the first static task as a template
-
-    // If no template exists, create one manually
-    templateTask = document.createElement("li");
+    // Declare the task element locally using const
+    const templateTask = document.createElement("li");
     templateTask.classList.add("item");
     templateTask.innerHTML = `
-          <label>
-            <input type="checkbox" />
-            <span></span>
-          </label>
-          <div class="buttons">
-            <button class="item-btn edit-btn">✏️</button>
-            <button class="item-btn delete-btn">❌</button>
-          </div>
-        `;
+        <label>
+          <input type="checkbox" />
+          <span></span>
+        </label>
+        <div class="buttons">
+          <button class="item-btn edit-btn">✏️</button>
+          <button class="item-btn delete-btn">❌</button>
+        </div>
+      `;
 
     const checkbox = templateTask.querySelector("input[type='checkbox']");
     const span = templateTask.querySelector("label span");
@@ -65,9 +63,16 @@ document.addEventListener("DOMContentLoaded", () => {
     checkbox.checked = completed;
     span.textContent = text;
 
-    // Update checkbox event
-    // Remove any previous listener by cloning the node for safety if needed
-    checkbox.addEventListener("change", saveTasks);
+    //
+    if (completed) {
+      span.classList.add("completed");
+    }
+
+    // Toggle on checkbox change and save tasks
+    checkbox.addEventListener("change", () => {
+      span.classList.toggle("completed", checkbox.checked);
+      saveTasks();
+    });
 
     // Edit task: load text into input box and change button text
     templateTask.querySelector(".edit-btn").addEventListener("click", () => {
@@ -75,12 +80,12 @@ document.addEventListener("DOMContentLoaded", () => {
       addTaskBtn.textContent = "Edit Task";
       editingTask = templateTask;
       taskInput.focus();
+      saveTasks();
     });
 
-    // Delete task
+    // Delete task: remove task and update editing state if needed
     templateTask.querySelector(".delete-btn").addEventListener("click", () => {
       templateTask.remove();
-      // Cancel editing if the task being edited is deleted
       if (editingTask === templateTask) {
         editingTask = null;
         addTaskBtn.textContent = "Add Task";
